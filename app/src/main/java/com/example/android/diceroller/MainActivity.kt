@@ -8,29 +8,29 @@ import java.util.Random
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var diceView: ImageView
+    private lateinit var diceImageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val rollButton: Button = findViewById(R.id.roll_button)
-        diceView = findViewById(R.id.dice_view)
         rollButton.setOnClickListener {
             rollDice()
         }
+
+        diceImageView = findViewById(R.id.dice_view)
     }
 
     private fun rollDice() {
-        val drawableResource = when (Random().nextInt(6) + 1) {
+        val getRandomInt = { Random().nextInt(6) + 1 }
+        diceImageView.setImageResource(when (getRandomInt()) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
             3 -> R.drawable.dice_3
             4 -> R.drawable.dice_4
             5 -> R.drawable.dice_5
-            6 -> R.drawable.dice_6
-            else -> R.drawable.empty_dice
-        }
-        diceView.setImageResource(drawableResource)
+            else -> R.drawable.dice_6
+        })
     }
 }
 
